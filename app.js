@@ -6,6 +6,7 @@ const menuitem = [
     {
         id: 1,
         img: "./images/item-1.jpeg",
+        categories: 'breakfast',
         title: "Buttermilk Pancakes",
         price: "$15.99",
         description: "I'm baby woke mlkshk wolf bitters live-edge blue bottle, hammock freegan copper mug whatever cold-pressed"
@@ -13,6 +14,7 @@ const menuitem = [
     {
         id: 2,
         img: "./images/item-2.jpeg",
+        categories: "lunch",
         title: "Diner Double",
         price: "$13.99",
         description: "vaporware iPhone mumblecore selvage raw denim slow-carb leggings gochujang helvetica man braid jianbing. Marfa thundercats"
@@ -20,6 +22,7 @@ const menuitem = [
     {
         id: 3,
         img: "./images/item-3.jpeg",
+        categories: "shakes",
         title: "Godzilla Milkshake",
         price: "$6.99",
         description: "ombucha chillwave fanny pack 3 wolf moon street art photo booth before they sold out organic viral."
@@ -27,51 +30,58 @@ const menuitem = [
     {
         id: 4,
         img: "./images/item-4.jpeg",
+        categories: 'breakfast',
         title: "Country Delight",
         price: "$20.99",
-        description: "Shabby chic keffiyeh neutra snackwave pork belly shoreditch. Prism austin mlkshk truffaut,",
+        description: "Shabby chic keffiyeh neutra snackwave pork belly shoreditch. Prism austin mlkshk truffaut,"
     },
     {
         id: 5,
         img: "./images/item-5.jpeg",
+        categories: "lunch",
         title: "Egg Attack",
         price: "$22.99",
-        description: "franzen vegan pabst bicycle rights kickstarter pinterest meditation farm-to-table 90's pop-up",
+        description: "franzen vegan pabst bicycle rights kickstarter pinterest meditation farm-to-table 90's pop-up"
     },
     {
         id: 6,
         img: "./images/item-6.jpeg",
+        categories: "shakes",
         title: "Oreo Dream",
         price: "$18.99",
-        description: "Portland chicharrones ethical edison bulb, palo sant craft beer chia heirloom iPhone everyday",
+        description: "Portland chicharrones ethical edison bulb, palo sant craft beer chia heirloom iPhone everyday"
     },
     {
         id: 7,
         img: "./images/item-7.jpeg",
+        categories: 'breakfast',
         title: "Bacon Overflow",
         price: "$8.99",
-        description: "carry jianbing normcore freegan. Viral single-origin coffee live-edge, pork belly cloud bread iceland put a bird",
+        description: "carry jianbing normcore freegan. Viral single-origin coffee live-edge, pork belly cloud bread iceland put a bird"
     },
     {
         id: 8,
         img: "./images/item-8.jpeg",
+        categories: "lunch",
         title: "American Classic",
         price: "$12.99",
-        description: "on it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut",
+        description: "on it tumblr kickstarter thundercats migas everyday carry squid palo santo leggings. Food truck truffaut"
     },
     {
         id: 9,
         img: "./images/item-9.jpeg",
+        categories: "shakes",
         title: "Quarantine Buddy",
         price: "$16.99",
-        description: "skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.",
+        description: "skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing."
     },
     {
         id: 10,
         img: "./images/item-10.jpeg",
+        categories: "dinner",
         title: "Steak Dinner",
         price: "$39.99",
-        description: "skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing.",
+        description: "skateboard fam synth authentic semiotics. Live-edge lyft af, edison bulb yuccie crucifix microdosing."
     }
 ]
 
@@ -102,8 +112,10 @@ buttons.innerHTML = btns.join("")
 
 const menucontent = document.querySelector('.menu-content')
 const menu = [];
+
+
 menuitem.forEach((item)=>{
-    const str =    `<div class="col-lg-6 col=md-6 col-sm-12 pb-5 menu-item">
+    const str = `<div class="col-lg-6 col=md-6 col-sm-12 pb-5 menu-item">
                       <div class="col-5 img">
                         <img  src=${item.img} width="100%" height="40%">
                       </div> 
@@ -117,9 +129,35 @@ menuitem.forEach((item)=>{
                             <p class="para">${item.description}</p>
                         </div><br>
                     </div>`    
-    menu.push(str)
-
+    menu.push(str)                
 });
 menucontent.innerHTML = menu.join("")
 
+
+//     for filtration
+const filterfuction = (filter)=>{
+
+    if(filter == "All"){
+        menucontent.innerHTML = menu.join()
+    }else{
+        const filterarry = menuitem.filter((item)=> item.categories.toLowerCase() === filter.toLowerCase()).forEach((item)=>{
+            const str = `<div class="col-lg-6 col=md-6 col-sm-12 pb-5 menu-item">
+                              <div class="col-5 img">
+                                <img  src=${item.img} width="100%" height="40%">
+                              </div> 
+                                <div class="col-12">
+                                    <div class="col-5 d-flex justify-content-between content">
+                                      <h5 class="foodtitle">${item.title}</h5>
+                                      <span class="price">${item.price}</span>
+                                      </div>
+                                </div>
+                                <div class="col-6 d-flex">
+                                    <p class="para">${item.description}</p>
+                                </div><br>
+                            </div>`    
+            menu.push(str)                
+        });
+        menucontent.innerHTML = filterarry.join("")
+    }
+}
 
