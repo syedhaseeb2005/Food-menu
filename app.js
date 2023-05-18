@@ -114,12 +114,12 @@ const menucontent = document.querySelector('.menu-content')
 const menu = [];
 
 
-menuitem.forEach((item)=>{
-    const str =    `<div class="col-lg-6 col=md-6 col-sm-12 pb-5 menu-item">
+const menuarry = menuitem.map((item)=>{
+    return    `<div class="col-lg-6 pb-5 menu-item">
                       <div class="col-5 img">
                         <img  src=${item.img} width="100%" height="40%">
                       </div> 
-                        <div class="col-12">
+                        <div class="col-12 price">
                             <div class="col-5 d-flex justify-content-between content">
                               <h5 class="foodtitle">${item.title}</h5>
                               <span class="price">${item.price}</span>
@@ -129,37 +129,35 @@ menuitem.forEach((item)=>{
                             <p class="para">${item.description}</p>
                         </div><br>
                     </div>`    
-    menu.push(str)                
+    // menu.push(str)                
 });
-menucontent.innerHTML = menu.join("")
+menucontent.innerHTML = menuarry.join("")
 
 
 //     for filtration
-const filterfuction = (fil)=>{
+const filterfuction = (filter)=>{
 
     if(filter == "All"){
-        menucontent.innerHTML = menu.join("")
+        menucontent.innerHTML = menuarry.join("")
     }else{
-
-        const filterarry = menuitem.filter((item) => item.categories.toLowerCase() === fil.toLowerCase()).map((item)=>{
-            return`<div class="col-lg-6 col=md-6 col-sm-12 pb-5 menu-item">
-                              <div class="col-5 img">
-                                <img  src=${item.img} width="100%" height="40%">
-                              </div> 
-                                <div class="col-12">
-                                    <div class="col-5 d-flex justify-content-between content">
-                                      <h5 class="foodtitle">${item.title}</h5>
-                                      <span class="price">${item.price}</span>
-                                      </div>
-                                </div>
-                                <div class="col-6 d-flex">
-                                    <p class="para">${item.description}</p>
-                                </div><br>
-                            </div>`    
-            // menu.push(str)                
-        });
-        // console.log(filterarry)
-            menucontent.innerHTML = filterarry.join("")
+        const filterarry = menuitem.filter((item) => item.categories.toLowerCase() === filter.toLowerCase()).map((item)=>{
+            return    `<div class="col-lg-6 pb-5 menu-item">
+            <div class="col-5 img">
+              <img  src=${item.img} width="100%" height="40%">
+            </div> 
+              <div class="col-12 price">
+                  <div class="col-5 d-flex justify-content-between content">
+                    <h5 class="foodtitle">${item.title}</h5>
+                    <span class="price">${item.price}</span>
+                   </div>
+              </div>
+              <div class="col-6 d-flex">
+                  <p class="para">${item.description}</p>
+              </div><br>
+          </div>` 
+        })     
+        console.log(filterfuction(filter))       
+        menucontent.innerHTML = filterarry.join("")
     }
 }
 
